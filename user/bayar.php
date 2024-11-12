@@ -16,19 +16,18 @@ $result = mysqli_query($mysqli, "SELECT pemesanan.*, route.* FROM pemesanan INNE
 $data = mysqli_fetch_array($result);
 ?>
 
-
-<div class="container-fluid packages py-5">
+<div class="container-fluid booking py-5">
     <div class="container py-5">
         <div class="row g-5 align-items-center">
-            <div class="container mt-0">
-            <div class="row" style="margin-top:12rem;">
+            <div class="container mt-4">
+            <div class="row" style="margin-top:10rem;">
                 <!-- Basic Layout -->
               
                 <!-- Basic with Icons -->
                 <div class="col-xxl">
                   <div class="card mb-4">
                     <div class="card-header d-flex align-items-center justify-content-between">
-                      <h5 class="mb-0">Pembayaran</h5><a href="?page=pembayaran" class='btn btn-secondary'>Kembali</a>
+                      <h5 class="mb-0">Pembayaran</h5><a href="?page=pembayaran" class='btn btn-primary'><span id="basic-icon-default-home"><i class="bx bx-home"> Home</i></span></a>
                     </div>
                     <div class="card-body">
                     <form name="update" method="post" action="">
@@ -114,7 +113,7 @@ $data = mysqli_fetch_array($result);
                         </div>
                         <div class="row justify-content-end">
                           <div class="col-sm-10">
-                            <button type="submit" name="update" class="btn btn-primary">Change</button>
+                            <button type="submit" name="update" class="btn btn-success">Bayar</button>
                           </div>
                         </div>
                       </form>
@@ -123,6 +122,8 @@ $data = mysqli_fetch_array($result);
                 </div>
               </div>
             </div>
+            </div>
         </div>
+                </div>
     </div>
 </div>

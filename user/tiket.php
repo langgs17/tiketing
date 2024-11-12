@@ -1,7 +1,7 @@
 <?php
 include "config.php";
 $id_user = $_SESSION['users']['id_user'];
-$result = mysqli_query($mysqli, "SELECT pemesanan.*, route.* FROM pemesanan INNER JOIN route ON pemesanan.id_route = route.id_route WHERE pemesanan.id_user = '$id_user' AND pemesanan.status = 'belum bayar'");
+$result = mysqli_query($mysqli, "SELECT pemesanan.*, route.* FROM pemesanan INNER JOIN route ON pemesanan.id_route = route.id_route WHERE pemesanan.id_user = '$id_user'");
 ?>
 
 <style>
@@ -19,7 +19,7 @@ $result = mysqli_query($mysqli, "SELECT pemesanan.*, route.* FROM pemesanan INNE
 
 <div class="container-fluid bg-breadcrumb">
     <div class="container text-center py-5" style="max-width: 900px;">
-        <h3 class="text-white display-3 mb-4">Travel Packages</h3>  
+        <h3 class="text-white display-3 mb-4">Daftar Tiket Anda</h3>  
     </div>
 </div>
 <!-- Header End -->
@@ -27,9 +27,6 @@ $result = mysqli_query($mysqli, "SELECT pemesanan.*, route.* FROM pemesanan INNE
 <!-- Packages Start -->
 <div class="container-fluid packages py-5">
     <div class="container py-5">
-        <div class="mx-auto text-center mb-5" style="max-width: 900px;">
-            <h3>Tiket Belum Di Bayar<h3>
-        </div>
         <div class="packages-row">
             <?php
             if (mysqli_num_rows($result) > 0) {
@@ -38,14 +35,30 @@ $result = mysqli_query($mysqli, "SELECT pemesanan.*, route.* FROM pemesanan INNE
                     $seat = $row['seat'];
                     $stasiun_asal = $row['stasiun_asal'];
                     $stasiun_tujuan = $row['stasiun_tujuan'];
+
+                    $status = $row['status'];
+
+                    if ($status == 'belum bayar') {
+                        $status_class = 'bg-label-danger'; 
+
+                    } elseif ($status == 'pending') {
+                        $status_class = 'bg-label-success'; 
+
+                    } elseif ($status == 'sudah bayar') {
+                        $status_class = 'bg-label-primary';
+                    }
                     ?>
                     <div class="packages-item">
                         <div class="packages-content bg-light p-4 mb-4 rounded shadow-sm">
                             <h5 class="mb-3"><?php echo $stasiun_asal; ?> <small class="fa fa-arrow-right text-black"></small> <?php echo $stasiun_tujuan; ?></h5>
                             <p class="text-uppercase mb-4 font-weight-bold"><?php echo $nama_kereta; ?></p>
                             <table style="width: 100%;">
+                                <tr class="mb-4">
+                                    <td>Nama Pelanggan</td>
+                                    <td>: <?php echo $row['nama_pelanggan']; ?></td>
+                                </tr>
                                 <tr>
-                                    <td>Jumlah penumpang</td>
+                                    <td class="status-pending">Jumlah penumpang</td>
                                     <td>: <?php echo $seat; ?> Orang</td><td hidden><?php echo $row['id_pemesanan']; ?></td>
                                 </tr>
                                 <tr>
@@ -64,14 +77,21 @@ $result = mysqli_query($mysqli, "SELECT pemesanan.*, route.* FROM pemesanan INNE
                                     <td>Harga Total</td>
                                     <td>: <?php echo $row['harga_total']; ?></td>
                                 </tr>
-                                
+                                <tr class="mb-4">
+                                    <td style="color: rgba(0, 0, 0, 0.0);">status</td>
+                                    <td class="status-wrapper <?php echo $status_class; ?>">
+                                        <?php echo $row['status']; ?>
+                                    </td>
+                                </tr>
                                 <tr>
-                                    <td class="td-padding">
-                                        <a href="?page=pembatalan&id_pemesanan=<?php echo $row['id_pemesanan']?>" class='btn btn-danger btn-padding'>Batalkan Pesanan</a>
-                                    </td>
-                                    <td class="td-padding">
-                                        <a href="?page=bayar&id_pemesanan=<?php echo $row['id_pemesanan']?>" class='btn btn-success btn-padding'>Bayar Sekarang</a>    
-                                    </td>
+                                    <?php if ($status == 'belum bayar') { ?>
+                                        <td><a href="?page=pembatalan&id_pemesanan=<?php echo $row['id_pemesanan']?>" class='btn btn-danger btn-padding'>Batalkan Pesanan</a></td>
+                                        <td><a href="?page=bayar&id_pemesanan=<?php echo $row['id_pemesanan']?>" class='btn btn-success btn-padding'>Bayar Sekarang</a></td>
+                                    <?php } elseif ($status == 'sudah bayar') { ?>
+                                        <td><a href="?page=cetak&id_pemesanan=<?php echo $row['id_pemesanan']?>" class='btn btn-primary btn-padding'>Cetak Tiket</a></td>
+                                    <?php } elseif ($status == 'pending') { ?>
+                                        <td><span class="status-pending bg-label-success">Menunggu Konfirmasi</span></td>
+                                    <?php } ?>
                                 </tr>
                             </table>
                         </div>
@@ -94,22 +114,29 @@ $result = mysqli_query($mysqli, "SELECT pemesanan.*, route.* FROM pemesanan INNE
         justify-content: flex-start; /* Menjaga jarak antar item */
     }
 
+    .status-pending {
+        white-space: nowrap; /* Menambahkan jarak antar baris untuk teks 'Menunggu Konfirmasi' */
+        font-size: 16px;  /* Anda bisa mengatur ukuran font sesuai kebutuhan */
+    }
+
     .packages-item {
         flex: 0 0 calc(33.333% - 20px); /* Lebar tetap 1/3 dari container */
         box-sizing: border-box;
     }
 
     .packages-content {
+        min-width: 350px;
+        max-width: 350px;
         height: 100%;
         box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Tambahkan shadow */
     }
 
     .packages-content table {
-        width: 100%;
+        max-width: 350px;
     }
 
     .packages-content table td {
-        white-space: nowrap;
+        max-width: 350px;
     }
 
     .packages-content table td:first-child {
@@ -124,4 +151,35 @@ $result = mysqli_query($mysqli, "SELECT pemesanan.*, route.* FROM pemesanan INNE
             flex: 0 0 100%; /* Setiap item akan mengambil 100% lebar pada layar kecil */
         }
     }
+    .bg-label-primary {
+        background-color: #e7e7ff !important;
+        color: #696cff !important;
+        border-radius: 8px !important;
+    }
+
+    .bg-label-secondary {
+        background-color: #ebeef0 !important;
+        color: #8592a3 !important;
+        border-radius: 8px !important;
+    }
+    .bg-label-success {
+        background-color: #e8fadf !important;
+        color: #71dd37 !important;
+        border-radius: 8px !important;
+    }
+    .bg-label-danger {
+        background-color: #ffe0db !important;
+        color: #ff3e1d !important;
+        border-radius: 8px !important;
+    }
+
+    .packages-content table td.status-wrapper {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 30px;            
+        padding: 0;              
+    }
+
+
 </style>

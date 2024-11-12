@@ -80,7 +80,7 @@ $rfs-mq-property-height: if($rfs-mode == max-media-query, max-height, min-height
 @mixin _rfs-media-query {
   @if $rfs-two-dimensional {
     @if $rfs-mode == max-media-query {
-      @media (#{$rfs-mq-property-width}: #{$rfs-mq-value}), (#{$rfs-mq-property-height}: #{$rfs-mq-value}) {
+      dia (#{$rfs-mq-property-width}: #{$rfs-mq-value}), (#{$rfs-mq-property-height}: #{$rfs-mq-value}) {
         @content;
       }
     }

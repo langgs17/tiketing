@@ -71,7 +71,7 @@ if (!isset($_SESSION['users'])) {
                             <a class="dropdown-toggle text-light" data-bs-toggle="dropdown"><small><i class="fa fa-user me-1"></i> My Dashboard</small></a>
                             <div class="dropdown-menu rounded">
                                 <a href="?page=profil" class="dropdown-item"><i class="fas fa-user-alt me-2"></i> My Profile</a>
-                                <a href="?page=logout" class="dropdown-item"><i class="fas fa-power-off me-2"></i> Log Out</a>
+                                <a href="../logout.php" class="dropdown-item"><i class="fas fa-power-off me-2"></i> Log Out</a>
                             </div>
                         </div>
                     </div>
@@ -84,7 +84,7 @@ if (!isset($_SESSION['users'])) {
         <div class="container-fluid position-relative p-0">
             <nav class="navbar navbar-expand-lg navbar-light px-4 px-lg-5 py-3 py-lg-0">
                 <a href="" class="navbar-brand p-0">
-                    <h1 class="m-0"><img src="img/favicon.ico"> Travela</h1>
+                    <h1 class="m-0"><img src="img/favicon.ico"> Sneat</h1>
                     <!-- <img src="img/logo.png" alt="Logo"> -->
                 </a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse">
@@ -94,10 +94,9 @@ if (!isset($_SESSION['users'])) {
                     <div class="navbar-nav ms-auto py-0">
                         <a href="?page=dashboard" class="nav-item nav-link <?php echo $page == 'dashboard' ? 'active' : ''; ?>">Home</a>
                         <a href="?page=route" class="nav-item nav-link <?php echo $page == 'route' ? 'active' : ''; ?>">Route Available</a>
-                        <a href="?page=stasiun" class="nav-item nav-link <?php echo $page == 'stasiun' ? 'active' : ''; ?>">Train Station</a>
-                        <a href="kontak.php" class="nav-item nav-link ">Contact</a>
+                        <a href="?page=tiket" class="nav-item nav-link <?php echo $page == 'tiket' ? 'active' : ''; ?>">Tiket Saya</a>
                         <a href="?page=pembayaran" class="nav-item nav-link <?php echo $page == 'pembayaran' || $page == 'bayar' ? 'active' : ''; ?>">Payment</a>
-                        <a href="?page=pesan" class="nav-item nav-link <?php echo $page == 'pesan' ? 'active' : ''; ?>">Book Now</a>
+                        <a href="?page=pesan" class="nav-item nav-link <?php echo $page == 'pesan'  || $page == 'pesanan' ? 'active' : ''; ?>">Book Now</a>
                     </div>
                 </div>
             </nav>
