@@ -96,7 +96,7 @@ if (!isset($_SESSION['users'])) {
                         <a href="?page=route" class="nav-item nav-link <?php echo $page == 'route' ? 'active' : ''; ?>">Route Available</a>
                         <a href="?page=stasiun" class="nav-item nav-link <?php echo $page == 'stasiun' ? 'active' : ''; ?>">Train Station</a>
                         <a href="kontak.php" class="nav-item nav-link ">Contact</a>
-                        <a href="?page=pembayaran" class="nav-item nav-link <?php echo $page == 'pembayaran' ? 'active' : ''; ?>">Payment</a>
+                        <a href="?page=pembayaran" class="nav-item nav-link <?php echo $page == 'pembayaran' || $page == 'bayar' ? 'active' : ''; ?>">Payment</a>
                         <a href="?page=pesan" class="nav-item nav-link <?php echo $page == 'pesan' ? 'active' : ''; ?>">Book Now</a>
                     </div>
                 </div>
