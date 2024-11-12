@@ -43,7 +43,7 @@ if (isset($_POST['add'])) {
         $result = mysqli_query($mysqli, $query);
         
         if ($result) {
-            echo '<script>alert("Add Train Data Successfully");location.href="?page=pembayaran";</script>';
+            echo '<script>alert("Tiket Berhasil di Pesan");location.href="?page=pembayaran";</script>';
         } else {
             echo '<script>alert("Add Train Data Failed: ' . mysqli_error($mysqli) . '");</script>';
         }

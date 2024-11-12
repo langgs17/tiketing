@@ -7,9 +7,9 @@ if (isset($_POST['update'])){
     
 
     if($query) {
-        echo '<script>alert("Ubah data pemesanan berhasil");location.href="?page=pembayaran";</script>';
+        echo '<script>alert("Pembayaran Sedang Di Proses Mohon Tunggu paling lambat 30 Menit ");location.href="?page=tiket";</script>';
     } else {
-        echo '<script>alert("Ubah data pemesanan gagal")</script>';
+        echo '<script>alert("Maaf Pembayaran Gagal")</script>';
     }
 }
 $result = mysqli_query($mysqli, "SELECT pemesanan.*, route.* FROM pemesanan INNER JOIN route ON pemesanan.id_route = route.id_route WHERE pemesanan.id_pemesanan = '$id_pemesanan'");
@@ -109,6 +109,41 @@ $data = mysqli_fetch_array($result);
                                 value="<?php echo $data['nama_kereta']; ?>"
                               />
                             </div>
+                            
+                          </div>
+                        </div>
+                        <div class="row mb-3">
+                          <label class="col-sm-2 form-label" for="basic-icon-default-barcode">Jumlah Penumpang</label>
+                          <div class="col-sm-10">
+                            <div class="input-group input-group-merge">
+                              <span id="basic-icon-default-barcode" class="input-group-text"
+                                ><i class="bx bx-user"></i
+                              ></span>
+                              <input
+                                type="text" readonly
+                                class="form-control"
+                                id="kode"
+                                value="<?php echo $data['seat']; ?>"
+                              />
+                            </div>
+                            
+                          </div>
+                        </div>
+                        <div class="row mb-3">
+                          <label class="col-sm-2 form-label" for="basic-icon-default-barcode">Total Harga</label>
+                          <div class="col-sm-10">
+                            <div class="input-group input-group-merge">
+                              <span id="basic-icon-default-barcode" class="input-group-text"
+                                ><i class="bx bx-wallet"></i
+                              ></span>
+                              <input
+                                type="text" readonly
+                                class="form-control"
+                                id="kode"
+                                value="Rp. <?php echo number_format($data['harga_total'], 0, ',', '.'); ?>"
+                              />
+                            </div>
+                            
                           </div>
                         </div>
                         <div class="row justify-content-end">

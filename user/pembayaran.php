@@ -1,7 +1,7 @@
 <?php
 include "config.php";
 $id_user = $_SESSION['users']['id_user'];
-$result = mysqli_query($mysqli, "SELECT pemesanan.*, route.* FROM pemesanan INNER JOIN route ON pemesanan.id_route = route.id_route WHERE pemesanan.id_user = '$id_user' AND pemesanan.status = 'belum bayar'");
+$result = mysqli_query($mysqli, "SELECT pemesanan.*, route.* FROM pemesanan INNER JOIN route ON pemesanan.id_route = route.id_route WHERE pemesanan.id_user = '$id_user' AND pemesanan.status = 'belum bayar' ORDER BY pemesanan.id_pemesanan DESC");
 ?>
 
 <style>
@@ -62,7 +62,7 @@ $result = mysqli_query($mysqli, "SELECT pemesanan.*, route.* FROM pemesanan INNE
                                 </tr>
                                 <tr class="mb-4">
                                     <td>Harga Total</td>
-                                    <td>: <?php echo $row['harga_total']; ?></td>
+                                    <td>: Rp. <?php echo number_format($row['harga_total'], 0, ',', '.'); ?></td>
                                 </tr>
                                 
                                 <tr>

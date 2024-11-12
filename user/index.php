@@ -93,10 +93,10 @@ if (!isset($_SESSION['users'])) {
                 <div class="collapse navbar-collapse" id="navbarCollapse">
                     <div class="navbar-nav ms-auto py-0">
                         <a href="?page=dashboard" class="nav-item nav-link <?php echo $page == 'dashboard' ? 'active' : ''; ?>">Home</a>
-                        <a href="?page=route" class="nav-item nav-link <?php echo $page == 'route' ? 'active' : ''; ?>">Route Available</a>
+                        <a href="?page=route" class="nav-item nav-link <?php echo $page == 'route' ? 'active' : ''; ?>">Route Tersedia</a>
+                        <a href="?page=pembayaran" class="nav-item nav-link <?php echo $page == 'pembayaran' || $page == 'bayar' ? 'active' : ''; ?>">Pembayaran</a>
                         <a href="?page=tiket" class="nav-item nav-link <?php echo $page == 'tiket' ? 'active' : ''; ?>">Tiket Saya</a>
-                        <a href="?page=pembayaran" class="nav-item nav-link <?php echo $page == 'pembayaran' || $page == 'bayar' ? 'active' : ''; ?>">Payment</a>
-                        <a href="?page=pesan" class="nav-item nav-link <?php echo $page == 'pesan'  || $page == 'pesanan' ? 'active' : ''; ?>">Book Now</a>
+                        <a href="?page=pesan" class="nav-item nav-link <?php echo $page == 'pesan'  || $page == 'pesanan' ? 'active' : ''; ?>">Pesan Tiket</a>
                     </div>
                 </div>
             </nav>
