@@ -1,102 +1,382 @@
 <?php
-if(isset($_POST['add'])) {
-    $nama_pelanggan = $_POST['nama_pelanggan'];
-    $id_user = $_SESSION['users']['id_user'];
-    $id_route = $_POST['id_route'];
-    $seat = $_POST['seat'];
-    $tanggal_berangkat = $_POST['tanggal_berangkat'];
-    $kategori = $_POST['kategori'];
-    $catatan = $_POST['catatan'];
+include "config.php";
+
+$routeQuery = "SELECT route.*, kereta.tipe FROM route 
+                JOIN kereta ON route.nama_kereta = kereta.nama_kereta";
+$routeResult = $mysqli->query($routeQuery);
 
 
+?>
+<?php
+include "config.php";
 
-    include 'config.php';
-    $result = mysqli_query($mysqli, "INSERT INTO pemesanan (nama_pelanggan,id_route,id_user,seat,tanggal_berangkat,kategori,catatan) VALUES('$nama_pelanggan','$id_route','$id_user', '$seat', '$tanggal_berangkat', '$kategori', '$catatan')");
-    
-    if ($result) {
-        echo '<script>alert("Add Train Data Succesfully");location.href="?page=kereta";</script>';    
-    } else {
-        echo '<script>alert("Add Train Data Failed!!")</script>';
-    }
+$routeQuery = "SELECT route.*, kereta.tipe FROM route 
+                JOIN kereta ON route.nama_kereta = kereta.nama_kereta";
+$routeResult = $mysqli->query($routeQuery);
 
-}
+
 ?>
 
-<div class="container-fluid booking py-5">
-            <div class="container py-5">
-                <div class="row g-5 align-items-center">
-                    <div class="col-lg-6">
-                        <h3 class="text-white mb-4">BOOKING</h3>
-                        <h5 class="text-white"> </h5>
-                        <h1 class="text-white mb-4">Online Ticket Booking</h1>                        
-                    </div>
-                    <div class="col-lg-6">
-                        <h1 class="text-white mb-3">Pergi Ke Mana Hari Ini?</h1>
-                        <form name="add" method="post" action="">
-                            <div class="row g-3">
-                            <?php
-                                $routeQuery = "SELECT id_route,stasiun_asal,stasiun_tujuan,nama_kereta,harga FROM route";
-                                $routeResult = $mysqli->query($routeQuery);
-                            ?>
 
-                                <div class="col-md-6">
-                                    <div class="form-floating">
-                                        <input type="text" class="form-control bg-white border-0" name="nama_pelanggan" id="name" placeholder="Nama Kamu">
-                                        <label for="name">Nama Pelanggan</label>
+<style>
+        /* CSS yang digabung */
+        a {
+            text-decoration: none;  
+            color: inherit;
+            display: block;         
+        }
+
+
+        .train-card {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+            margin: 20px auto;  /* Centers the cards horizontally */
+            width: 80%;  /* Makes the card width 80% of the container */
+            max-width: 1200px;  /* Limit the card width to 1200px */
+            border: 1px solid #e0e0e0;
+        }
+        .train-info {
+            flex: 2;
+        }
+        .train-name {
+            font-size: 18px;
+            font-weight: bold;
+            margin: 0;
+        }
+        .train-class {
+            font-size: 14px;
+            color: #666;
+        }
+        .schedule {
+            display: flex;
+            align-items: center;
+            flex: 3;
+            padding-left: 20px;
+        }
+
+        .departure, .arrival {
+            text-align: center;
+
+            
+        }
+
+        .schedule p {
+            white-space: nowrap; /* Mencegah teks menjadi dua baris */
+        }
+
+        .departure h2, .arrival h2 {
+            font-size: 24px;
+            margin: 0;
+            color: #333;
+        }
+        .schedule .duration {
+            text-align: center;
+            color: #aaa;
+            font-size: 12px;
+            padding: 0 20px;
+            display: flex;
+            align-items: center;
+        }
+        .line {
+            width: 20px;
+            height: 2px;
+            background-color: #ccc;
+            margin: 0 5px;
+        }
+        .duration .line {
+            width: 20px;
+            height: 2px;
+            background-color: #ccc;
+            margin: 0 5px;
+        }
+        .day-offset {
+            font-size: 12px;
+            vertical-align: super;
+        }
+        .availability {
+            text-align: right;
+            flex: 1;
+        }
+        .seats-left {
+            color: #e63946;
+            font-size: 14px;
+            margin: 0;
+        }
+        .details-link {
+            color: #007bff;
+            font-size: 14px;
+            text-decoration: none;
+        }
+        .price {
+            text-align: right;
+            flex: 1;
+        }
+        .price-amount {
+            font-size: 18px;
+            color: #e63946;
+            margin: 0;
+        }
+        .points {
+            color: #888;
+            font-size: 14px;
+        }
+
+        /* Container adjustment */
+        .container {
+            width: 90%; /* Makes the container width 90% of the screen */
+            margin: 0 auto; /* Centers the container */
+        }
+
+        /* Optional: Adjust column width in smaller screens */
+        @media (max-width: 768px) {
+            .train-card {
+                width: 100%;  /* Make the cards full width on smaller screens */
+                margin: 10px 0;
+            }
+        }
+    </style>
+
+<div class="container-fluid booking py-5">
+    <div class="container py-5">
+        <div class="row g-5 align-items-center">
+            <div class="container mt-4">
+                <div class="row">
+                    <?php
+                    if ($routeResult->num_rows > 0) {
+                        while ($row = $routeResult->fetch_assoc()) {
+                            ?>
+                            <a href="?page=pesanan&id_route=<?php echo htmlspecialchars($row['id_route']); ?>" class="train-card col-12 mb-4">
+                                <div class="train-info">
+                                    <h5 class="train-name"><?php echo htmlspecialchars($row['nama_kereta']); ?> <?php echo htmlspecialchars($row['id_route']); ?></h5>
+                                    <p class="train-class"><?php echo htmlspecialchars($row['tipe']);?></p>
+                                    <p style="color: white; font-size: 1px;" class="train-class"><?php echo htmlspecialchars($row['id_route']); ?></h5></p>
+                                    <div class="schedule">
+                                        <div class="">
+                                            <p>Waktu Berangkat  :<?php echo htmlspecialchars($row['waktu_berangkat']); ?></p>
+                                            <p>Waktu kereta tiba :<?php echo htmlspecialchars($row['waktu_tiba']); ?></p>
+                                        </div>
                                     </div>
                                 </div>
-                                <div class="col-md-6">
-                                    <div class="form-floating date" id="date3" data-target-input="nearest">
-                                        <input type="date" name="tanggal_berangkat" class="form-control bg-white border-0" id="date" placeholder="Tanggal Berangkat" data-target="#date3" data-toggle="datetimepicker" />
-                                        <label for="date">Tanggal Berangkat</label>
+
+                                
+                               
+                                <div class="schedule">
+                                    <div class="departure">
+                                        <h2><?php echo htmlspecialchars($row['stasiun_asal']); ?></h2>
+                                    </div>
+                                    <div class="duration">
+                                        <span><i class="fas fa-arrow-right" style="black"></i></span>
+                                    </div>
+                                    <div class="arrival">
+                                        <h2><?php echo htmlspecialchars($row['stasiun_tujuan']); ?></h2>
                                     </div>
                                 </div>
-                                <div class="col-md-6">
-                                    <div class="form-floating">
-                                        <input type="number" class="form-control bg-white border-0" name="seat" id="seat" placeholder="1" >
-                                        <label for="seat">Untuk Berapa Orang</label>
-                                    </div>
+                                <div class="price">
+                                    <p class="price-amount">IDR <?php echo number_format($row['harga'], 0, ',', '.'); ?>/pax</p>
+                                    <p class="points">510 poin</p>
                                 </div>
-                                <div class="col-md-6">
-                                    <div class="form-floating">
-                                        <select class="form-select bg-white border-0" name="kategori" id="kategori">
-                                            <option selected>Choose Station...</option>
-                                            <option value="dewasa">Dewasa</option>
-                                            <option value="anak-anak">Anak anak</option>
-                                        </select>
-                                        <label for="CategoriesSelect">Kategori</label>
-                                    </div>
-                                </div>
-                                <div class="col-md-12">
-                                    <div class="form-floating">
-                                        <select class="form-select bg-white border-0" name="id_route" value="id_route" id="id_route">
-                                            <option selected>Choose Station...</option>
-                                            <?php
-                                                if ($routeResult->num_rows > 0) {
-                                                    while($row = $routeResult->fetch_assoc()) {
-                                                        echo "<option value='".$row['id_route']."'>".$row['id_route'].'| '.$row['stasiun_tujuan']."</option>";
-                                                    }
-                                                } else {
-                                                    echo "<option value=''>No anggota available</option>";
-                                                }
-                                            ?>
-                                        </select>
-                                        <label for="id_route">Dari Stasiun Mana?</label>
-                                    </div>
-                                </div>
-                                <div class="col-12">
-                                    <div class="form-floating">
-                                        <textarea class="form-control bg-white border-0" name="catatan" placeholder="Special Request" id="message" style="height: 150px"></textarea>
-                                        <label for="message">Deskripsi</label>
-                                        <input type="hidden" value="belum bayar" name="status" >
-                                    </div>
-                                </div>
-                                <div class="col-12">
-                                    <button class="btn btn-primary text-white w-100 py-3" name="add" type="submit">Book Now</button>
-                                </div>
-                            </div>
-                        </form>
-                    </div>
+                                
+                            </a>
+                            <?php            
+                        }
+                    } else {
+                        echo "<p>No route available</p>";
+                    }
+                    ?>
                 </div>
             </div>
         </div>
+                </div>
+    </div>
+</div>
+
+
+
+
+
+
+<style>
+        /* CSS yang digabung */
+        a {
+            text-decoration: none;  
+            color: inherit;
+            display: block;         
+        }
+
+
+        .train-card {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+            margin: 20px auto;  /* Centers the cards horizontally */
+            width: 80%;  /* Makes the card width 80% of the container */
+            max-width: 1200px;  /* Limit the card width to 1200px */
+            border: 1px solid #e0e0e0;
+        }
+        .train-info {
+            flex: 2;
+        }
+        .train-name {
+            font-size: 18px;
+            font-weight: bold;
+            margin: 0;
+        }
+        .train-class {
+            font-size: 14px;
+            color: #666;
+        }
+        .schedule {
+            display: flex;
+            align-items: center;
+            flex: 3;
+            padding-left: 20px;
+        }
+
+        .departure, .arrival {
+            text-align: center;
+
+            
+        }
+
+        .schedule p {
+            white-space: nowrap; /* Mencegah teks menjadi dua baris */
+        }
+
+        .departure h2, .arrival h2 {
+            font-size: 24px;
+            margin: 0;
+            color: #333;
+        }
+        .schedule .duration {
+            text-align: center;
+            color: #aaa;
+            font-size: 12px;
+            padding: 0 20px;
+            display: flex;
+            align-items: center;
+        }
+        .line {
+            width: 20px;
+            height: 2px;
+            background-color: #ccc;
+            margin: 0 5px;
+        }
+        .duration .line {
+            width: 20px;
+            height: 2px;
+            background-color: #ccc;
+            margin: 0 5px;
+        }
+        .day-offset {
+            font-size: 12px;
+            vertical-align: super;
+        }
+        .availability {
+            text-align: right;
+            flex: 1;
+        }
+        .seats-left {
+            color: #e63946;
+            font-size: 14px;
+            margin: 0;
+        }
+        .details-link {
+            color: #007bff;
+            font-size: 14px;
+            text-decoration: none;
+        }
+        .price {
+            text-align: right;
+            flex: 1;
+        }
+        .price-amount {
+            font-size: 18px;
+            color: #e63946;
+            margin: 0;
+        }
+        .points {
+            color: #888;
+            font-size: 14px;
+        }
+
+        /* Container adjustment */
+        .container {
+            width: 90%; /* Makes the container width 90% of the screen */
+            margin: 0 auto; /* Centers the container */
+        }
+
+        /* Optional: Adjust column width in smaller screens */
+        @media (max-width: 768px) {
+            .train-card {
+                width: 100%;  /* Make the cards full width on smaller screens */
+                margin: 10px 0;
+            }
+        }
+    </style>
+
+<div class="container-fluid booking py-5">
+    <div class="container py-5">
+        <div class="row g-5 align-items-center">
+            <div class="container mt-4">
+                <div class="row">
+                    <?php
+                    if ($routeResult->num_rows > 0) {
+                        while ($row = $routeResult->fetch_assoc()) {
+                            ?>
+                            <a href="?page=pesanan&id_route=<?php echo htmlspecialchars($row['id_route']); ?>" class="train-card col-12 mb-4">
+                                <div class="train-info">
+                                    <h5 class="train-name"><?php echo htmlspecialchars($row['nama_kereta']); ?> <?php echo htmlspecialchars($row['id_route']); ?></h5>
+                                    <p class="train-class"><?php echo htmlspecialchars($row['tipe']);?></p>
+                                    <p style="color: white; font-size: 1px;" class="train-class"><?php echo htmlspecialchars($row['id_route']); ?></h5></p>
+                                    <div class="schedule">
+                                        <div class="">
+                                            <p>Waktu Berangkat  :<?php echo htmlspecialchars($row['waktu_berangkat']); ?></p>
+                                            <p>Waktu kereta tiba :<?php echo htmlspecialchars($row['waktu_tiba']); ?></p>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                
+                               
+                                <div class="schedule">
+                                    <div class="departure">
+                                        <h2><?php echo htmlspecialchars($row['stasiun_asal']); ?></h2>
+                                    </div>
+                                    <div class="duration">
+                                        <span><i class="fas fa-arrow-right" style="black"></i></span>
+                                    </div>
+                                    <div class="arrival">
+                                        <h2><?php echo htmlspecialchars($row['stasiun_tujuan']); ?></h2>
+                                    </div>
+                                </div>
+                                <div class="price">
+                                    <p class="price-amount">IDR <?php echo number_format($row['harga'], 0, ',', '.'); ?>/pax</p>
+                                    <p class="points">510 poin</p>
+                                </div>
+                                
+                            </a>
+                            <?php            
+                        }
+                    } else {
+                        echo "<p>No route available</p>";
+                    }
+                    ?>
+                </div>
+            </div>
+        </div>
+                </div>
+    </div>
+</div>
+
+
+
+

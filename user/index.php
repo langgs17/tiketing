@@ -3,11 +3,14 @@
 session_start();
 include "config.php";
 
+
+$page = isset($_GET['page']) ? $_GET['page'] : 'dashboard';
+
+
 if (!isset($_SESSION['users'])) {
 	header('location:../index.php');
 }
 
-$page = isset($_GET['page']) ? $_GET['page'] : 'dashboard';
 
 ?>
 
@@ -21,6 +24,7 @@ $page = isset($_GET['page']) ? $_GET['page'] : 'dashboard';
         <meta content="" name="keywords">
         <meta content="" name="description">
         <link rel="icon" type="image/x-icon" href="../assets/img/favicon/favicon.ico" />
+        <link rel="stylesheet" href="../assets/vendor/fonts/boxicons.css" />
 
 
         <!-- Google Web Fonts -->
@@ -47,7 +51,11 @@ $page = isset($_GET['page']) ? $_GET['page'] : 'dashboard';
     <body>
 
         <!-- Spinner Start -->
-        
+        <div id="spinner" class="show bg-white position-fixed translate-middle w-100 vh-100 top-50 start-50 d-flex align-items-center justify-content-center">
+            <div class="spinner-border text-primary" style="width: 3rem; height: 3rem;" role="status">
+                <span class="sr-only">loading...</span>
+            </div>
+        </div>
         <!-- Spinner End -->
 
         <!-- Topbar Start -->
@@ -171,15 +179,6 @@ $page = isset($_GET['page']) ? $_GET['page'] : 'dashboard';
                                         </div>
                                     </form>
                                 </div>
-                            </div>
-                            <h4 class="text-white mb-3">Payments</h4>
-                            <div class="footer-bank-card">
-                                <a href="#" class="text-white me-2"><i class="fab fa-cc-amex fa-2x"></i></a>
-                                <a href="#" class="text-white me-2"><i class="fab fa-cc-visa fa-2x"></i></a>
-                                <a href="#" class="text-white me-2"><i class="fas fa-credit-card fa-2x"></i></a>
-                                <a href="#" class="text-white me-2"><i class="fab fa-cc-mastercard fa-2x"></i></a>
-                                <a href="#" class="text-white me-2"><i class="fab fa-cc-paypal fa-2x"></i></a>
-                                <a href="#" class="text-white"><i class="fab fa-cc-discover fa-2x"></i></a>
                             </div>
                         </div>
                     </div>

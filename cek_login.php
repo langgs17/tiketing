@@ -15,6 +15,7 @@ if(isset($_POST['username'])) {
 		$_SESSION['users'] =mysqli_fetch_array($cek_user);
 		header ("location:user/index.php");
 
+
 	} else {
 		echo 
         '<script>
@@ -23,6 +24,8 @@ if(isset($_POST['username'])) {
         </script>';
         
 	}
+
+
 
 }
 ?>
