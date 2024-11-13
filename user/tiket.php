@@ -1,7 +1,8 @@
 <?php
 include "config.php";
 $id_user = $_SESSION['users']['id_user'];
-$result = mysqli_query($mysqli, "SELECT pemesanan.*, route.* FROM pemesanan INNER JOIN route ON pemesanan.id_route = route.id_route WHERE pemesanan.id_user = '$id_user' AND pemesanan.status != 'belum bayar' ORDER BY pemesanan.id_pemesanan DESC");
+$sudahBayar = mysqli_query($mysqli, "SELECT pemesanan.*, route.* FROM pemesanan INNER JOIN route ON pemesanan.id_route = route.id_route WHERE pemesanan.id_user = '$id_user' AND pemesanan.status='sudah bayar' ORDER BY pemesanan.id_pemesanan DESC");
+$belumBayar = mysqli_query($mysqli, "SELECT pemesanan.*, route.* FROM pemesanan INNER JOIN route ON pemesanan.id_route = route.id_route WHERE pemesanan.id_user = '$id_user' AND pemesanan.status='belum bayar' ORDER BY pemesanan.id_pemesanan DESC");
 ?>
 
 <style>
@@ -29,8 +30,88 @@ $result = mysqli_query($mysqli, "SELECT pemesanan.*, route.* FROM pemesanan INNE
     <div class="container py-5">
         <div class="packages-row">
             <?php
-            if (mysqli_num_rows($result) > 0) {
-                while ($row = mysqli_fetch_assoc($result)) {
+            if (mysqli_num_rows($belumBayar) > 0) {
+                while ($row = mysqli_fetch_assoc($belumBayar)) {
+                    $nama_kereta = $row['nama_kereta'];
+                    $seat = $row['seat'];
+                    $stasiun_asal = $row['stasiun_asal'];
+                    $stasiun_tujuan = $row['stasiun_tujuan'];
+
+                    $status = $row['status'];
+
+                    if ($status == 'belum bayar') {
+                        $status_class = 'bg-label-danger'; 
+
+                    } elseif ($status == 'pending') {
+                        $status_class = 'bg-label-success'; 
+
+                    } elseif ($status == 'sudah bayar') {
+                        $status_class = 'bg-label-primary';
+                    }
+                    ?>
+                    <div class="packages-item">
+                        <div class="packages-content bg-light p-4 mb-4 rounded shadow-sm">
+                            <h5 class="mb-3"><?php echo $stasiun_asal; ?> <small class="fa fa-arrow-right text-black"></small> <?php echo $stasiun_tujuan; ?></h5>
+                            <p class="text-uppercase mb-4 font-weight-bold"><?php echo $nama_kereta; ?></p>
+                            <table style="width: 100%;">
+                                <tr class="mb-4">
+                                    <td>Nama Pelanggan</td>
+                                    <td>: <?php echo $row['nama_pelanggan']; ?></td>
+                                </tr>
+                                <tr>
+                                    <td class="status-pending">Jumlah penumpang</td>
+                                    <td>: <?php echo $seat; ?> Orang</td><td hidden><?php echo $row['id_pemesanan']; ?></td>
+                                </tr>
+                                <tr>
+                                    <td>Tanggal Berangkat</td>
+                                    <td>: <?php echo $row['tanggal_berangkat']; ?></td>
+                                </tr>
+                                <tr>
+                                    <td>Waktu Berangkat</td>
+                                    <td>: <?php echo $row['waktu_berangkat']; ?></td>
+                                </tr>
+                                <tr>
+                                    <td>Waktu Tiba</td>
+                                    <td>: <?php echo $row['waktu_tiba']; ?></td>
+                                </tr>
+                                <tr class="mb-4">
+                                    <td>Harga Total</td>
+                                    <td>: Rp. <?php echo number_format($row['harga_total'], 0, ',', '.'); ?></td>
+                                </tr>
+                                <tr class="mb-4">
+                                    <td style="color: rgba(0, 0, 0, 0.0);">status</td>
+                                    <td class="status-wrapper <?php echo $status_class; ?>">
+                                        <?php echo $row['status']; ?>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <?php if ($status == 'belum bayar') { ?>
+                                        <td><a href="?page=pembatalan&id_pemesanan=<?php echo $row['id_pemesanan']?>" class='btn btn-danger btn-padding'>Batalkan Pesanan</a></td>
+                                        <td><a href="?page=bayar&id_pemesanan=<?php echo $row['id_pemesanan']?>" class='btn btn-success btn-padding'>Bayar Sekarang</a></td>
+                                    <?php } elseif ($status == 'sudah bayar') { ?>
+                                        <td><a href="?page=cetak&id_pemesanan=<?php echo $row['id_pemesanan']?>" class='btn btn-primary btn-padding'>Cetak Tiket</a></td>
+                                    <?php } elseif ($status == 'pending') { ?>
+                                        <td><span class="status-pending bg-label-success">Menunggu Konfirmasi</span></td>
+                                    <?php } ?>
+                                </tr>
+                            </table>
+                        </div>
+                    </div>
+                    <?php
+                }
+            } else {
+                echo '<div class="mx-auto text-center"><font size="5">Tidak Ada Tiket Yang Belum Dibayar</font></div>';
+            }
+            ?>
+        </div>
+    </div>
+</div>
+<div class="container-fluid packages py-5">
+    <div class="container py-5">
+        <div class="packages-row">
+            <?php
+            if (mysqli_num_rows($sudahBayar) > 0) {
+                while ($row = mysqli_fetch_assoc($sudahBayar)) {
                     $nama_kereta = $row['nama_kereta'];
                     $seat = $row['seat'];
                     $stasiun_asal = $row['stasiun_asal'];
