@@ -132,7 +132,7 @@ $routeResult = $mysqli->query($routeQuery);
                                     <h5 class="train-name"><?php echo htmlspecialchars($row['nama_kereta']); ?></h5>
                                     <p class="train-class"><?php echo htmlspecialchars($row['tipe']); ?></p>
                                     <div class="schedule">
-                                        <p>Waktu Berangkat: <?php echo htmlspecialchars($row['waktu_berangkat']); ?></p>
+                                        <p>Berangkat Pukul : <?php echo htmlspecialchars($row['waktu_berangkat']); ?></p>
                                     </div>
                                 </div>
                                 <div class="schedule">

@@ -148,6 +148,20 @@ $page = isset($_GET['page']) ? $_GET['page'] : 'dashboard';
               </a>
             </li>
 
+            <li class="menu-header small text-uppercase"><span class="menu-header-text">Pemesanan Data</span></li>
+            <li class="menu-item <?php echo $page == 'pemesanan' ? 'active' : ''; ?>">
+              <a href="?page=pemesanan" class="menu-link ">
+                <i class="menu-icon tf-icons bx bx-user-check"></i>
+                <div data-i18n="User interface">Tiket Data</div>
+              </a>
+            </li>
+
+            <li class="menu-item <?php echo $page == 'pemesanan_confirm' ? 'active' : ''; ?>">
+              <a href="?page=pemesanan_confirm" class="menu-link ">
+                <i class="menu-icon tf-icons bx bx-user"></i>
+                <div data-i18n="User interface">Confirm Payment</div>
+              </a>
+            </li>
             <li class="menu-header small text-uppercase"><span class="menu-header-text">Manage Data</span></li>
             <li class="menu-item <?php echo $page == 'admin' ? 'active' : ''; ?>">
               <a href="?page=admin" class="menu-link ">

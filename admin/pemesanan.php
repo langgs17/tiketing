@@ -1,7 +1,7 @@
 <?php
 include 'config.php';
 
-$result = mysqli_query($mysqli, "SELECT * FROM pemesanan ORDER BY id_pemesanan DESC");
+$result = mysqli_query($mysqli, "SELECT pemesanan.*, route.* FROM pemesanan INNER JOIN route ON pemesanan.id_route = route.id_route ORDER BY pemesanan.id_pemesanan DESC");
 
 if (!$result) {
     die("Query gagal: " . mysqli_error($mysqli));
@@ -18,14 +18,10 @@ if (!$result) {
                 <table class="table table-striped">
                 <thead class="table-light">
                     <tr>
-                        <th>ID</th>
-                        <th>tanggal pesan</th>
-                        <th>Stasiun Awal</th>
-                        <th>Stasiun Tujuan</th>
-                        <th>Train ID</th>
+                        <th>Nama Pelanggan</th>
+                        <th>ID User</th>
+                        <th>Route Kereta</th>
                         <th>Train Name</th>
-                        <th>Departure Time</level>
-                        <th>Arrival Time</level>
                         <th>harga</th>
                         <th>status</th>
                     </tr>
@@ -36,24 +32,20 @@ if (!$result) {
                             
                             while($data = mysqli_fetch_array($result)) {
 
-                                if ($data['status'] == 'belum dibayar') {
+                                if ($data['status'] == 'belum bayar') {
                                     $color = 'badge bg-label-danger me-1';
                                 } elseif ($data['status'] == 'pending') {
                                     $color = 'badge bg-label-primary me-1';
-                                } elseif ($data['status'] == 'sudah dibayar') {
+                                } elseif ($data['status'] == 'sudah bayar') {
                                     $color = 'badge bg-label-success me-1';
                                 }
                                 
                                 echo "<tr>";
-                                echo "<td>".$data['id_pemesanan']."</td>";
-                                echo "<td>".$data['tanggal_pemesanan']."</td>";
+                                echo "<td>".$data['nama_pelanggan']."</td>";
                                 echo "<td>".$data['id_user']."</td>";
-                                echo "<td>".$data['id_route']."</td>";
-                                echo "<td>".$data['tanggal_berangkat']."</td>";
-                                echo "<td>".$data['waktu_tiba']."</td>";
-                                echo "<td>".$data['waktu_berangkat']."</td>";
-                                echo "<td>".$data['harga']."</td>";
-                                echo "<td> Rp. " . number_format($data['harga'], 0, ',', '.') . "</td>";
+                                echo "<td>".$data['stasiun_asal'].' - '.$data['stasiun_asal']."</td>";
+                                echo "<td>".$data['nama_kereta']."</td>";
+                                echo "<td> Rp. " . number_format($data['harga_total'], 0, ',', '.') . "</td>";
                                 echo 
                                     '<td><span class="' . $color . ';">' . ucfirst($data['status']) . '</span></td>';
                             }
