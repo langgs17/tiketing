@@ -1,7 +1,7 @@
 <?php
 include "config.php";
 $id_user = $_SESSION['users']['id_user'];
-$result = mysqli_query($mysqli, "SELECT pemesanan.*, route.* FROM pemesanan INNER JOIN route ON pemesanan.id_route = route.id_route WHERE pemesanan.id_user = '$id_user' ORDER BY pemesanan.id_pemesanan DESC");
+$result = mysqli_query($mysqli, "SELECT pemesanan.*, route.* FROM pemesanan INNER JOIN route ON pemesanan.id_route = route.id_route WHERE pemesanan.id_user = '$id_user' AND status != 'dibatalkan' ORDER BY pemesanan.id_pemesanan DESC");
 ?>
 
 <style>

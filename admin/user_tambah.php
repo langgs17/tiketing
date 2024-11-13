@@ -26,7 +26,7 @@ if(isset($_POST['add'])) {
             <!-- Content -->
 
             <div class="container-xxl flex-grow-1 container-p-y">
-              <h4 class="fw-bold py-3 mb-4">Change Train Data</h4>
+              <h4 class="fw-bold py-3 mb-4">Tambah Data Users</h4>
 
               <!-- Basic Layout & Basic with Icons -->
               <div class="row">
@@ -36,7 +36,7 @@ if(isset($_POST['add'])) {
                 <div class="col-xxl">
                   <div class="card mb-4">
                     <div class="card-header d-flex align-items-center justify-content-between">
-                      <h5 class="mb-0">Change Train Data</h5>
+                      <h5 class="mb-0">Tambah Data Users</h5>
                     </div>
                     <div class="card-body">
                     <form name="update" method="post" action="">
@@ -55,7 +55,7 @@ if(isset($_POST['add'])) {
                           </div>
                         </div>
                         <div class="row mb-3">
-                          <label class="col-sm-2 col-form-label" for="basic-icon-default-train">Name Users</label>
+                          <label class="col-sm-2 col-form-label" for="basic-icon-default-train">Name Lengkap</label>
                           <div class="col-sm-10">
                             <div class="input-group input-group-merge">
                               <input
@@ -107,7 +107,7 @@ if(isset($_POST['add'])) {
                         </div>
                         <div class="row justify-content-end">
                           <div class="col-sm-10">
-                            <button type="submit" name="add" class="btn btn-primary">Change</button>
+                            <button type="submit" name="add" class="btn btn-primary">Tambah</button>
                           </div>
                         </div>
                       </form>

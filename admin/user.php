@@ -10,7 +10,7 @@ if (!$result) {
 
 <div class="content-wrapper">
     <div class="container-xxl flex-grow-1 container-p-y">
-        <h4 class="fw-bold py-3 mb-4"> Train Data Management </h4>
+        <h4 class="fw-bold py-3 mb-4"> User Data Management </h4>
         <div class="card">
             <div class="card-header">
                 <a class="btn btn-primary" style="position:relative; float:left;" href="?page=user_tambah">Insert Train</a>

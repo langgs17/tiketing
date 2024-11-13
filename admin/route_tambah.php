@@ -17,9 +17,9 @@ if(isset($_POST['add'])) {
 
     if($query) {
 
-        echo "<script>alert('Ubah data users berhasil');location.href='?page=route';</script>";
+        echo "<script>alert('Tambah Data Route Berhasil');location.href='?page=route';</script>";
     } else {
-        echo '<script>alert("Ubah data users gagal")</script>';
+        echo '<script>alert("Tambah data Route gagal")</script>';
     }
  }
 ?>

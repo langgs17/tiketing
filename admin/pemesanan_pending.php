@@ -1,16 +1,14 @@
 <?php
 include 'config.php';
 
-$result = mysqli_query($mysqli, "SELECT pemesanan.*, route.* FROM pemesanan INNER JOIN route ON pemesanan.id_route = route.id_route ORDER BY pemesanan.id_pemesanan DESC");
+$query = mysqli_query($mysqli, "SELECT pemesanan.*, route.* FROM pemesanan INNER JOIN route ON pemesanan.id_route = route.id_route WHERE pemesanan.status = 'pending' ORDER BY pemesanan.id_pemesanan DESC");
 
-if (!$result) {
-    die("Query gagal: " . mysqli_error($mysqli));
-}
+
 ?>
 
 <div class="content-wrapper">
     <div class="container-xxl flex-grow-1 container-p-y">
-        <h4 class="fw-bold py-3 mb-4"> Data Pesanan Tiket </h4>
+        <h4 class="fw-bold py-3 mb-4"> Konfirmasi Pembayaran </h4>
         <div class="card">
 
             <div class="card-body">
@@ -23,23 +21,21 @@ if (!$result) {
                         <th>Route Kereta</th>
                         <th>Train Name</th>
                         <th>harga</th>
-                        <th>status</th>
+                        <th><center>status</center></th>
                     </tr>
                 </thead>
                 <tbody class="table-border-bottom-0">
                     <tr>
                         <?php
                             
-                            while($data = mysqli_fetch_array($result)) {
+                            while($data = mysqli_fetch_array($query)) {
 
                                 if ($data['status'] == 'belum bayar') {
-                                    $color = 'badge bg-label-warning me-1';
+                                    $color = 'badge bg-label-danger me-1';
                                 } elseif ($data['status'] == 'pending') {
                                     $color = 'badge bg-label-primary me-1';
                                 } elseif ($data['status'] == 'sudah bayar') {
                                     $color = 'badge bg-label-success me-1';
-                                } elseif ($data['status'] == 'dibatalkan') {
-                                    $color = 'badge bg-label-danger me-1';
                                 }
                                 
                                 echo "<tr>";
@@ -48,9 +44,7 @@ if (!$result) {
                                 echo "<td>".$data['stasiun_asal'].' - '.$data['stasiun_asal']."</td>";
                                 echo "<td>".$data['nama_kereta']."</td>";
                                 echo "<td> Rp. " . number_format($data['harga_total'], 0, ',', '.') . "</td>";
-                                echo 
-                                    '<td><span class="' . $color . ';">' . ucfirst($data['status']) . '</span></td>';
-                            }
+                                echo "<td><center><a href='?page=pem_confirm&id_pemesanan=$data[id_pemesanan]'class='btn btn-primary'>Konfirmasi</a>";                            }
                         ?>
                     </tr>
                 </tbody>

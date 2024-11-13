@@ -113,7 +113,7 @@ if (!isset($_SESSION['users'])) {
                 <div class="row g-5">
                     <div class="col-md-6 col-lg-6 col-xl-3">
                         <div class="footer-item d-flex flex-column">
-                            <h4 class="mb-4 text-white">Get In Touch</h4>
+                            <h4 class="mb-4 text-white">Kontak Saya</h4>
                             <a href=""><i class="fas fa-home me-2"></i> 123 Street, New York, USA</a>
                             <a href=""><i class="fas fa-envelope me-2"></i> info@example.com</a>
                             <a href=""><i class="fas fa-phone me-2"></i> +012 345 67890</a>
@@ -127,58 +127,15 @@ if (!isset($_SESSION['users'])) {
                             </div>
                         </div>
                     </div>
-                    <div class="col-md-6 col-lg-6 col-xl-3">
-                        <div class="footer-item d-flex flex-column">
-                            <h4 class="mb-4 text-white">Company</h4>
-                            <a href=""><i class="fas fa-angle-right me-2"></i> About</a>
-                            <a href=""><i class="fas fa-angle-right me-2"></i> Careers</a>
-                            <a href=""><i class="fas fa-angle-right me-2"></i> Blog</a>
-                            <a href=""><i class="fas fa-angle-right me-2"></i> Press</a>
-                            <a href=""><i class="fas fa-angle-right me-2"></i> Gift Cards</a>
-                            <a href=""><i class="fas fa-angle-right me-2"></i> Magazine</a>
-                        </div>
-                    </div>
+                    
                     <div class="col-md-6 col-lg-6 col-xl-3">
                         <div class="footer-item d-flex flex-column">
                             <h4 class="mb-4 text-white">Support</h4>
-                            <a href=""><i class="fas fa-angle-right me-2"></i> Contact</a>
-                            <a href=""><i class="fas fa-angle-right me-2"></i> Legal Notice</a>
-                            <a href=""><i class="fas fa-angle-right me-2"></i> Privacy Policy</a>
-                            <a href=""><i class="fas fa-angle-right me-2"></i> Terms and Conditions</a>
-                            <a href=""><i class="fas fa-angle-right me-2"></i> Sitemap</a>
-                            <a href=""><i class="fas fa-angle-right me-2"></i> Cookie policy</a>
-                        </div>
-                    </div>
-                    <div class="col-md-6 col-lg-6 col-xl-3">
-                        <div class="footer-item">
-                            <div class="row gy-3 gx-2 mb-4">
-                                <div class="col-xl-6">
-                                    <form>
-                                        <div class="form-floating">
-                                            <select class="form-select bg-dark border" id="select1">
-                                                <option value="1">Arabic</option>
-                                                <option value="2">German</option>
-                                                <option value="3">Greek</option>
-                                                <option value="3">New York</option>
-                                            </select>
-                                            <label for="select1">English</label>
-                                        </div>
-                                    </form>
-                                </div>
-                                <div class="col-xl-6">
-                                    <form>
-                                        <div class="form-floating">
-                                            <select class="form-select bg-dark border" id="select1">
-                                                <option value="1">USD</option>
-                                                <option value="2">EUR</option>
-                                                <option value="3">INR</option>
-                                                <option value="3">GBP</option>
-                                            </select>
-                                            <label for="select1">$</label>
-                                        </div>
-                                    </form>
-                                </div>
-                            </div>
+                            <a href="https://mail.google.com/mail/?view=cm&fs=1&to=mggilang212@gmail.com"><i class="fas fa-angle-right me-2"></i> Contact</a>
+                            <a href="https://github.com/langgs17"><i class="fas fa-angle-right me-2"></i> Github</a>
+                            <a href="https://instagram.com/xny_raaa/profilecard/?igsh=bDR5bWMxYWQ3YXAz"><i class="fas fa-angle-right me-2"></i> Instagram</a>
+                            <a href="https://www.linkedin.com/in/muhamad-gilang-hamdani/"><i class="fas fa-angle-right me-2"></i> LinkedIn</a>
+                            <a href="https://mail.google.com/mail/?view=cm&fs=1&to=mggilang212@gmail.com"><i class="fas fa-angle-right me-2"></i> Email</a>
                         </div>
                     </div>
                 </div>
@@ -191,13 +148,13 @@ if (!isset($_SESSION['users'])) {
             <div class="container">
                 <div class="row g-4 align-items-center">
                     <div class="col-md-6 text-center text-md-end mb-md-0">
-                        <i class="fas fa-copyright me-2"></i><a class="text-white" href="#">Your Site Name</a>, All right reserved.
+                        <i class="fas fa-copyright me-2"></i><a class="text-white" href="#">Sneat.Com</a>, All right reserved.
                     </div>
                     <div class="col-md-6 text-center text-md-start">
                         <!--/*** This template is free as long as you keep the below author’s credit link/attribution link/backlink. ***/-->
                         <!--/*** If you'd like to use the template without the below author’s credit link/attribution link/backlink, ***/-->
                         <!--/*** you can purchase the Credit Removal License from "https://htmlcodex.com/credit-removal". ***/-->
-                        Designed By <a class="text-white" href="https://htmlcodex.com">HTML Codex</a> Distributed By <a href="https://themewagon.com">ThemeWagon</a>
+                        Designed By <a class="text-white" href="https://instagram.com/gilangg_hamdani/profilecard/?igsh=MXRybGZIMmJpdjJmeg">Hamdani</a> And Supported By <a class="text-white" href="https://instagram.com/xny_raaa/profilecard/?igsh=bDR5bWMxYWQ3YXAz">Aura Aprillia</a>
                     </div>
                     </div>
                 </div>

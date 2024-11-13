@@ -23,29 +23,29 @@
                     </div>
                     <div class="col-lg-7" style="background: linear-gradient(rgba(255, 255, 255, .8), rgba(255, 255, 255, .8)), url(img/about-img-1.png);">
                         <h1 class="mb-4">Welcome to <span class="text-primary">Sneat</span></h1>
-                        <p class="mb-4">Lorem ipsum dolor sit amet consectetur adipisicing elit. Molestias, dolorum, doloribus sunt dicta, officia voluptatibus libero necessitatibus natus impedit quam ullam assumenda? Id atque iste consectetur. Commodi odit ab saepe!</p>
-                        <p class="mb-4">Lorem ipsum dolor sit amet consectetur adipisicing elit. Accusantium quos voluptatem suscipit neque enim, doloribus ipsum rem eos distinctio, dignissimos nisi saepe nulla? Libero numquam perferendis provident placeat molestiae quia?</p>
+                        <p class="mb-4">Sneat menampilkan harga tiket pesawat murah yang telah dianalisa dan diolah dari jaringan sumber-sumber resmi. Sneat adalah website pencarian tiket pesawat online terbesar di Indonesia. Yuk, segera pesan tiket pesawat murah promo hanya di Sneat sekarang juga!</p>
+                        <p class="mb-2">Platform ini menyediakan berbagai keuntungan untuk mempermudah proses pemesanan tiket pesawat secara online. Manfaatkan layanan Traveloka untuk mendapatkan tiket pesawat dengan harga terbaik dan berbagai penawaran menarik. Segera cek tiket pesawat di Traveloka dan mulailah merencanakan liburan Anda dengan lebih mudah!</p>
+                        <p class="mb-2"><b>Keuntungan Yang Kami Berikan?</b></p>
                         <div class="row gy-2 gx-4 mb-4">
                             <div class="col-sm-6">
-                                <p class="mb-0"><i class="fa fa-arrow-right text-primary me-2"></i>First Class Flights</p>
+                                <p class="mb-0"><i class="fa fa-arrow-right text-primary me-2"></i>Pesan Tiket Lebih Mudah</p>
                             </div>
                             <div class="col-sm-6">
-                                <p class="mb-0"><i class="fa fa-arrow-right text-primary me-2"></i>Handpicked Hotels</p>
+                                <p class="mb-0"><i class="fa fa-arrow-right text-primary me-2"></i>Pesan Tiket Lebih Hemat</p>
                             </div>
                             <div class="col-sm-6">
-                                <p class="mb-0"><i class="fa fa-arrow-right text-primary me-2"></i>5 Star Accommodations</p>
+                                <p class="mb-0"><i class="fa fa-arrow-right text-primary me-2"></i>Pilihan Produk Terbaik</p>
                             </div>
                             <div class="col-sm-6">
-                                <p class="mb-0"><i class="fa fa-arrow-right text-primary me-2"></i>Latest Model Vehicles</p>
+                                <p class="mb-0"><i class="fa fa-arrow-right text-primary me-2"></i>Sistem Pencarian Cerdas</p>
                             </div>
                             <div class="col-sm-6">
-                                <p class="mb-0"><i class="fa fa-arrow-right text-primary me-2"></i>150 Premium City Tours</p>
+                                <p class="mb-0"><i class="fa fa-arrow-right text-primary me-2"></i>Customer Service 24/7</p>
                             </div>
                             <div class="col-sm-6">
-                                <p class="mb-0"><i class="fa fa-arrow-right text-primary me-2"></i>24/7 Service</p>
+                                <p class="mb-0"><i class="fa fa-arrow-right text-primary me-2"></i>Pembayaran Dijamin Aman</p>
                             </div>
                         </div>
-                        <a class="btn btn-primary rounded-pill py-3 px-5 mt-2" href="">Read More</a>
                     </div>
                 </div>
             </div>
@@ -56,13 +56,12 @@
         <div class="container-fluid subscribe py-5">
             <div class="container text-center py-5">
                 <div class="mx-auto text-center" style="max-width: 900px;">
-                    <h5 class="subscribe-title px-3">Subscribe</h5>
-                    <h1 class="text-white mb-4">Our Newsletter</h1>
-                    <p class="text-white mb-5">Lorem ipsum dolor sit amet consectetur adipisicing elit. Laborum tempore nam, architecto doloremque velit explicabo? Voluptate sunt eveniet fuga eligendi! Expedita laudantium fugiat corrupti eum cum repellat a laborum quasi.
+                    <h5 class="subscribe-title px-3">LAPORAN</h5>
+                    <h1 class="text-white mb-4">Kirim Laporan Jika Perjalanan Anda terganggu</h1>
+                    <p class="text-white mb-5">Kami Mohon Maaf Jika Ada Perjalanan Anda Terasa Tidak Nyaman, Kami Menerima Laporan 24 Jam, Kami Akan Bertanggung Jawab Sesuai Dengan Kasus Anda, Terima Kasih 
                     </p>
                     <div class="position-relative mx-auto">
-                        <input class="form-control border-primary rounded-pill w-100 py-3 ps-4 pe-5" type="text" placeholder="Your email">
-                        <button type="button" class="btn btn-primary rounded-pill position-absolute top-0 end-0 py-2 px-4 mt-2 me-2">Subscribe</button>
+                        <center><a href="https://mail.google.com/mail/?view=cm&fs=1&to=example@example.com"><button class="btn btn-primary rounded-pill">Buat Laporan</button></a><center>
                     </div>
                 </div>
             </div>

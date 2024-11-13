@@ -151,17 +151,25 @@ $page = isset($_GET['page']) ? $_GET['page'] : 'dashboard';
             <li class="menu-header small text-uppercase"><span class="menu-header-text">Pemesanan Data</span></li>
             <li class="menu-item <?php echo $page == 'pemesanan' ? 'active' : ''; ?>">
               <a href="?page=pemesanan" class="menu-link ">
-                <i class="menu-icon tf-icons bx bx-user-check"></i>
+                <i class="menu-icon tf-icons bx bxs-coupon"></i>
                 <div data-i18n="User interface">Tiket Data</div>
               </a>
             </li>
 
-            <li class="menu-item <?php echo $page == 'pemesanan_confirm' ? 'active' : ''; ?>">
-              <a href="?page=pemesanan_confirm" class="menu-link ">
-                <i class="menu-icon tf-icons bx bx-user"></i>
-                <div data-i18n="User interface">Confirm Payment</div>
+            <li class="menu-item <?php echo $page == 'pemesanan_pending' ? 'active' : ''; ?>">
+              <a href="?page=pemesanan_pending" class="menu-link ">
+                <i class="menu-icon tf-icons bx bx-credit-card"></i>
+                <div data-i18n="User interface">Konfirmasi Pembayaran</div>
               </a>
             </li>
+
+            <li class="menu-item <?php echo $page == 'pemesanan_batal' ? 'active' : ''; ?>">
+              <a href="?page=pemesanan_batal" class="menu-link ">
+                <i class="menu-icon tf-icons bx bx-trash-alt"></i>
+                <div data-i18n="User interface">Pesanan Dibatalkan</div>
+              </a>
+            </li>
+
             <li class="menu-header small text-uppercase"><span class="menu-header-text">Manage Data</span></li>
             <li class="menu-item <?php echo $page == 'admin' ? 'active' : ''; ?>">
               <a href="?page=admin" class="menu-link ">

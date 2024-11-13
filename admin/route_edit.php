@@ -15,9 +15,9 @@ if (isset($_POST['update'])){
     
 
     if($query) {
-        echo '<script>alert("Ubah data stasiun berhasil");location.href="?page=route";</script>';
+        echo '<script>alert("Ubah Data Route Berhasil");location.href="?page=route";</script>';
     } else {
-        echo '<script>alert("Ubah data stasiun gagal")</script>';
+        echo '<script>alert("Ubah Data Route Gagal")</script>';
     }
  }
  $result = mysqli_query($mysqli, "SELECT*FROM route WHERE id_route=$id_route");

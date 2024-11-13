@@ -45,7 +45,7 @@ if (isset($_POST['add'])) {
         if ($result) {
             echo '<script>alert("Tiket Berhasil di Pesan");location.href="?page=pembayaran";</script>';
         } else {
-            echo '<script>alert("Add Train Data Failed: ' . mysqli_error($mysqli) . '");</script>';
+            echo '<script>alert("Add Tiket Data Failed: ' . mysqli_error($mysqli) . '");</script>';
         }
     } else {
         echo '<script>alert("Pastikan semua data terisi dengan benar!");</script>';
