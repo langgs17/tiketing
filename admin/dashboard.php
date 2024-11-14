@@ -35,38 +35,38 @@
         </div>
           <div class="row">
             <div class="col-xl-3 col-md-6">
-                <div class="card bg-primary text-white mb-4">
-                    <div class="card-body">Train Data</div>
+                <div class="card shadow-none bg-transparent border border-primary mb-3">
+                    <div class="card-body">Data Kereta</div>
                     <div class="card-footer d-flex align-items-center justify-content-between">
-                        <a class="small text-white stretched-link" href="index.php?page=kereta">View data</a>
+                        <a class="small text-black stretched-link" href="index.php?page=kereta">Lihat Detail</a>
                         <div class="small text-white"><i class="fas fa-angle-right"></i></div>
                     </div>
                 </div>
             </div>
             <div class="col-xl-3 col-md-6">
-                <div class="card bg-warning text-white mb-4">
-                    <div class="card-body">Station Data</div>
+                <div class="card shadow-none bg-transparent border border-warning mb-3">
+                    <div class="card-body">Data Stasiun</div>
                     <div class="card-footer d-flex align-items-center justify-content-between">
-                        <a class="small text-white stretched-link" href="?page=stasiun">View Detail</a>
+                        <a class="small text-black stretched-link" href="?page=stasiun">Lihat Detail</a>
                         <div class="small text-white"><i class="fas fa-angle-right"></i></div>
                     </div>
                 </div>
             </div>
             <div class="col-xl-3 col-md-6">
-                <div class="card bg-success text-white mb-4">
-                    <div class="card-body">Rental Data</div>
+                <div class="card shadow-none bg-transparent border border-success mb-3">
+                    <div class="card-body">Data Route</div>
                     <div class="card-footer d-flex align-items-center justify-content-between">
-                        <a class="small text-white stretched-link" href="data_pinjam.php">View Data</a>
+                        <a class="small text-black stretched-link" href="?page=route">Lihat Detail</a>
                         <div class="small text-white"><i class="fas fa-angle-right"></i></div>
                     </div>
                 </div>
             </div>
             <div class="col-xl-3 col-md-6">
-                <div class="card bg-danger text-white mb-4">
-                    <div class="card-body">Return Data</div>
+                <div class="card shadow-none bg-transparent border border-info mb-3">
+                    <div class="card-body">Konfirmasi Pembayaran</div>
                     <div class="card-footer d-flex align-items-center justify-content-between">
-                        <a class="small text-white stretched-link" href="pengembalian.php">View Data</a>
-                        <div class="small text-white"><i class="fas fa-angle-right"></i></div>
+                        <a class="small text-black stretched-link" href="?page=pemesanan_pending">Lihat Detail</a>
+                        <div class="small text-black"><i class="fas fa-angle-right"></i></div>
                     </div>
                 </div>
             </div>

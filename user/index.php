@@ -67,13 +67,7 @@ if (!isset($_SESSION['users'])) {
                 </div>
                 <div class="col-lg-4 text-center text-lg-end">
                     <div class="d-inline-flex align-items-center" style="height: 45px;">
-                        <div class="dropdown">
-                            <a class="dropdown-toggle text-light" data-bs-toggle="dropdown"><small><i class="fa fa-user me-1"></i> My Dashboard</small></a>
-                            <div class="dropdown-menu rounded">
-                                <a href="?page=profil" class="dropdown-item"><i class="fas fa-user-alt me-2"></i> My Profile</a>
-                                <a href="../logout.php" class="dropdown-item"><i class="fas fa-power-off me-2"></i> Log Out</a>
-                            </div>
-                        </div>
+                        <a href="../logout.php" class="text-light"><small> Logout <i class="bx bx-log-in-circle"></i></small></a>
                     </div>
                 </div>
             </div>
