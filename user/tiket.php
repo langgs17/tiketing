@@ -88,7 +88,7 @@ $result = mysqli_query($mysqli, "SELECT pemesanan.*, route.* FROM pemesanan INNE
                                         <td><a href="?page=pembatalan&id_pemesanan=<?php echo $row['id_pemesanan']?>" class='btn btn-danger btn-padding'>Batalkan Pesanan</a></td>
                                         <td><a href="?page=bayar&id_pemesanan=<?php echo $row['id_pemesanan']?>" class='btn btn-success btn-padding'>Bayar Sekarang</a></td>
                                     <?php } elseif ($status == 'sudah bayar') { ?>
-                                        <td><a href="?page=cetak&id_pemesanan=<?php echo $row['id_pemesanan']?>" class='btn btn-primary btn-padding'>Cetak Tiket</a></td>
+                                        <td><a href="cetak.php?id_pemesanan=<?php echo $row['id_pemesanan']?>" class='btn btn-primary btn-padding'>Cetak Tiket</a></td>
                                     <?php } elseif ($status == 'pending') { ?>
                                         <td><span class="status-pending bg-label-success">Menunggu Konfirmasi</span></td>
                                     <?php } ?>
