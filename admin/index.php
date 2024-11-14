@@ -12,6 +12,19 @@ $page = isset($_GET['page']) ? $_GET['page'] : 'dashboard';
 
 ?>
 <!DOCTYPE html>
+
+<!-- =========================================================
+* Sneat - Bootstrap 5 HTML Admin Template - Pro | v1.0.0
+==============================================================
+
+* Product Page: https://themeselection.com/products/sneat-bootstrap-html-admin-template/
+* Created by: ThemeSelection
+* License: You must have a valid license purchased in order to legally use the theme for your project.
+* Copyright ThemeSelection (https://themeselection.com)
+
+=========================================================
+ -->
+<!-- beautify ignore:start -->
 <html
   lang="en"
   class="light-style layout-menu-fixed"
@@ -27,7 +40,7 @@ $page = isset($_GET['page']) ? $_GET['page'] : 'dashboard';
       content="width=device-width, initial-scale=1.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0"
     />
 
-    <title>Sneat Ticket | Lang</title>
+    <title>Dashboard - Analytics | Sneat - Bootstrap 5 HTML Admin Template - Pro</title>
 
     <meta name="description" content="" />
 
@@ -73,7 +86,7 @@ $page = isset($_GET['page']) ? $_GET['page'] : 'dashboard';
 
         <aside id="layout-menu" class="layout-menu menu-vertical menu bg-menu-theme">
           <div class="app-brand demo">
-            <a href="?page=dashboard" class="app-brand-link">
+            <a href="index.html" class="app-brand-link">
               <span class="app-brand-logo demo">
                 <svg
                   width="25"
@@ -129,10 +142,10 @@ $page = isset($_GET['page']) ? $_GET['page'] : 'dashboard';
                   </g>
                 </svg>
               </span>
-              <span class="app-brand-text demo menu-text fw-bolder ms-2">sneat</span>
+              <span class="app-brand-text demo menu-text fw-bolder ms-2">Sneat</span>
             </a>
 
-            <a href="javascript:void(0);" class="layout- menu-link text-large ms-auto d-block d-xl-none">
+            <a href="javascript:void(0);" class="layout-menu-toggle menu-link text-large ms-auto d-block d-xl-none">
               <i class="bx bx-chevron-left bx-sm align-middle"></i>
             </a>
           </div>
@@ -205,7 +218,6 @@ $page = isset($_GET['page']) ? $_GET['page'] : 'dashboard';
                 <div data-i18n="User interface">Route Data</div>
               </a>
             </li>
-
           </ul>
         </aside>
         <!-- / Menu -->
@@ -216,25 +228,22 @@ $page = isset($_GET['page']) ? $_GET['page'] : 'dashboard';
 
           <nav
             class="layout-navbar container-xxl navbar navbar-expand-xl navbar-detached align-items-center bg-navbar-theme"
-            id_user="layout-navbar"
+            id="layout-navbar"
           >
-            <div class="layout- navbar-nav align-items-xl-center me-3 me-xl-0 d-xl-none">
+            <div class="layout-menu-toggle navbar-nav align-items-xl-center me-3 me-xl-0 d-xl-none">
               <a class="nav-item nav-link px-0 me-xl-4" href="javascript:void(0)">
                 <i class="bx bx-menu bx-sm"></i>
               </a>
             </div>
 
-            <div class="navbar-nav-right d-flex align-items-center" id_user="navbar-collapse">
+            <div class="navbar-nav-right d-flex align-items-center" id="navbar-collapse">
               <!-- Search -->
-              <div class="navbar-nav align-items-center">
-                <div class="nav-item d-flex align-items-center">
-                  <header class="fs-4 lh-0">Ticketing Aplication | Hamdani</header>
-                </div>
-              </div>
+              
               <!-- /Search -->
 
               <ul class="navbar-nav flex-row align-items-center ms-auto">
                 <!-- Place this tag where you want the button to render. -->
+                
 
                 <!-- User -->
                 <li class="nav-item navbar-dropdown dropdown-user dropdown">
@@ -269,6 +278,9 @@ $page = isset($_GET['page']) ? $_GET['page'] : 'dashboard';
                       </a>
                     </li>
                     <li>
+                      <div class="dropdown-divider"></div>
+                    </li>
+                    <li>
                       <a class="dropdown-item" href="../logout.php">
                         <i class="bx bx-power-off me-2"></i>
                         <span class="align-middle">Log Out</span>
@@ -281,44 +293,36 @@ $page = isset($_GET['page']) ? $_GET['page'] : 'dashboard';
             </div>
           </nav>
 
-          <!-- / Navbar -->
+          <main class="content">				
+            <?php 
+            $page = isset($_GET['page']) ? $_GET['page'] : 'dashboard';
+            include $page . '.php';
+            ?>
+          </main>
 
-          
-            <!-- MAIN -->
-            <main class="content">				
-                <?php 
-                $page = isset($_GET['page']) ? $_GET['page'] : 'dashboard';
-                include $page . '.php';
-                ?>
-			</main>
-            <!-- / MAIN -->
-
-
-            <!-- Footer -->
-            
+            <footer class="py-4 bg-light mt-auto">
+              <div class="container-fluid px-4">
+                <div class="d-flex align-items-center justify-content-between small">
+                  <div class="text-muted">Copyright &copy; Langs </div>
+                    <div>
+                      <a href="#">Privacy Policy</a>
+                      &middot;
+                      <a href="#">Terms &amp; Conditions</a>
+                    </div>
+                </div>
+              </div>
+            </footer>
             <!-- / Footer -->
 
-
-          <footer class="py-4 bg-light mt-auto">
-            <div class="container-fluid px-4">
-              <div class="d-flex align-items-center justify-content-between small">
-                <div class="text-muted">Copyright &copy; Langs </div>
-                  <div>
-                    <a href="#">Privacy Policy</a>
-                    &middot;
-                    <a href="#">Terms &amp; Conditions</a>
-                  </div>
-              </div>
-            </div>
-          </footer>
+            <div class="content-backdrop fade"></div>
+          </div>
           <!-- Content wrapper -->
         </div>
-        
         <!-- / Layout page -->
       </div>
 
       <!-- Overlay -->
-      <div class="layout-overlay layout-"></div>
+      <div class="layout-overlay layout-menu-toggle"></div>
     </div>
     <!-- / Layout wrapper -->
 

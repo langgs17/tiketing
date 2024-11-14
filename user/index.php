@@ -151,9 +151,6 @@ if (!isset($_SESSION['users'])) {
                         <i class="fas fa-copyright me-2"></i><a class="text-white" href="#">Sneat.Com</a>, All right reserved.
                     </div>
                     <div class="col-md-6 text-center text-md-start">
-                        <!--/*** This template is free as long as you keep the below author’s credit link/attribution link/backlink. ***/-->
-                        <!--/*** If you'd like to use the template without the below author’s credit link/attribution link/backlink, ***/-->
-                        <!--/*** you can purchase the Credit Removal License from "https://htmlcodex.com/credit-removal". ***/-->
                         Designed By <a class="text-white" href="https://instagram.com/gilangg_hamdani/profilecard/?igsh=MXRybGZIMmJpdjJmeg">Hamdani</a> And Supported By <a class="text-white" href="https://instagram.com/xny_raaa/profilecard/?igsh=bDR5bWMxYWQ3YXAz">Aura Aprillia</a>
                     </div>
                     </div>
