@@ -1,25 +1,28 @@
 <?php
 include 'config.php';
 
-// Ambil data pemesanan yang telah berhasil disimpan di database
-$id_pemesanan = $_GET['id_pemesanan']; // ID pemesanan didapat dari query string
+// Ambil ID pemesanan dari query string
+$id_pemesanan = $_GET['id_pemesanan'];
 
-$query = "SELECT pemesanan.*, route.*
-          FROM pemesanan 
-          JOIN route ON pemesanan.id_route = route.id_route
+// Query untuk mengambil data pemesanan dan rute berdasarkan ID pemesanan
+$query = "SELECT pemesanan.*, route.* FROM pemesanan 
+          JOIN route ON pemesanan.id_route = route.id_route 
           WHERE pemesanan.id_pemesanan = '$id_pemesanan'";
 
 $result = mysqli_query($mysqli, $query);
 $pemesanan = mysqli_fetch_assoc($result);
 
+// Jika data pemesanan ditemukan, ambil informasinya
 if ($pemesanan) {
     $nama_pelanggan = $pemesanan['nama_pelanggan'];
     $stasiun_asal = $pemesanan['stasiun_asal'];
     $stasiun_tujuan = $pemesanan['stasiun_tujuan'];
-    $tanggal_berangkat = date('d-m-Y', strtotime($pemesanan['tanggal_berangkat'])); // Format tanggal
-    $waktu_keberangkat = date('H:i', strtotime($pemesanan['waktu_berangkat'])); // Format waktu
+    $tanggal_berangkat = date('l, d F Y', strtotime($pemesanan['tanggal_berangkat']));
+    $waktu_keberangkat = date('H:i', strtotime($pemesanan['waktu_berangkat']));
+    $waktu_tiba = date('H:i', strtotime($pemesanan['waktu_tiba']));
     $seat = $pemesanan['seat'];
-    $harga_total = $pemesanan['harga_total'];
+    $harga_total = number_format($pemesanan['harga_total'], 0, ',', '.');
+    $kode_booking = strtoupper(substr(md5($id_pemesanan), 0, 8));
 } else {
     echo "Data pemesanan tidak ditemukan!";
     exit;
@@ -31,111 +34,123 @@ if ($pemesanan) {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>E-Tiket Kereta</title>
+    <title>Cetak Tiket</title>
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-        body {
-            font-family: 'Arial', sans-serif;
-            background-color: #f4f4f4;
-            padding: 20px;
-        }
-        .tiket-container {
-            width: 650px;
+        /* CSS untuk tampilan tiket */
+        .ticket-container {
+            max-width: 600px;
             margin: 0 auto;
-            background-color: #fff;
-            border-radius: 10px;
-            padding: 30px;
-            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+            border: 1px solid #ddd;
+            padding: 20px;
+            font-family: Arial, sans-serif;
+            position: relative;
         }
         .header {
-            text-align: center;
-            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding-bottom: 10px;
+            border-bottom: 1px solid #ddd;
         }
         .header img {
-            width: 180px;
-            height: auto;
+            width: 30px;
         }
-        .header h2 {
-            margin-top: 10px;
-            font-size: 28px;
+        .title {
+            font-size: 20px;
             font-weight: bold;
-            color: #333;
         }
-        .ticket-details {
-            margin-top: 20px;
-            font-size: 16px;
-        }
-        .ticket-details p {
-            margin: 10px 0;
-        }
-        .ticket-details .label {
+        .logo {
+            display: flex;
+            align-items: center; /* Untuk menengahkan logo Sneat */
+            font-size: 20px;
             font-weight: bold;
-            color: #444;
-            display: inline-block;
-            width: 180px;
         }
-        .ticket-details .value {
-            color: #555;
-            display: inline-block;
+        .kode-booking {
+            font-size: 18px;
+            font-weight: bold;
+            color: #007BFF;
         }
-        .divider {
-            border-top: 2px solid #ccc;
-            margin: 20px 0;
-        }
-        .footer {
-            text-align: center;
-            margin-top: 30px;
-        }
-        .footer button {
-            padding: 12px 25px;
-            background-color: #008CBA;
-            color: white;
-            border: none;
-            cursor: pointer;
-            border-radius: 5px;
-            font-size: 16px;
-            width: 220px;
-        }
-        .footer button:hover {
-            background-color: #006F8A;
-        }
-        .footer p {
+        .ticket-info {
             margin-top: 15px;
+        }
+        .info-item {
+            margin: 5px 0;
+        }
+        .station-info {
+            display: flex;
+            justify-content: space-between;
+            margin: 20px 0;
+            border-bottom: 1px solid #ddd;
+            padding-bottom: 15px;
+        }
+        .station-info div {
+            text-align: center;
+            font-weight: bold;
+        }
+        .station-info div span {
+            display: block;
             font-size: 14px;
-            color: #777;
+            color: #555;
+        }
+        .arrow {
+            font-size: 24px;
+            align-self: center;
+        }
+        .details {
+            font-size: 12px;
+            color: #555;
+            margin-top: 20px;
+            border-top: 1px solid #ddd;
+            padding-top: 10px;
+        }
+        .price {
+            font-size: 16px;
+            font-weight: bold;
+            color: #FF5733;
+            text-align: center;
+            margin-top: 10px;
         }
     </style>
+    <script>
+        function printTicket() {
+            window.print();
+        }
+    </script>
 </head>
-<body>
+<body onload="printTicket()">
 
-    <div class="tiket-container">
-        <div class="header">
-            <!-- Logo atau Gambar Header -->
-            <img src="https://syfaganjarstory.com/wp-content/uploads/2023/01/e-ticket-kereta_reg_1.webp" alt="Logo Kereta">
-            <h2>E-Tiket Kereta Api</h2>
+<div class="ticket-container">
+    <div class="header">
+        <div class="logo"><img src="img/logo-cetak.ico"> Sneat </div>
+        <div class="title">E-Tiket </div>
+        <div class="kode-booking">Kode Booking: <?= $kode_booking ?></div>
+    </div>
+
+    <div class="ticket-info">
+        <div class="info-item"><strong>Nama Penumpang:</strong> <?= htmlspecialchars($nama_pelanggan) ?></div>
+        <div class="info-item"><strong>Tanggal Berangkat:</strong> <?= htmlspecialchars($tanggal_berangkat) ?></div>
+    </div>
+
+    <div class="station-info">
+        <div>
+            <strong><?= htmlspecialchars($waktu_keberangkat) ?></strong>
+            <span><?= htmlspecialchars($stasiun_asal) ?></span>
         </div>
-
-        <div class="ticket-details">
-            <p><span class="label">Nama Pemesan:</span><span class="value"> <?php echo htmlspecialchars($nama_pelanggan); ?> </span></p>
-            <p><span class="label">Stasiun Asal:</span><span class="value"><?php echo htmlspecialchars($stasiun_asal); ?> </span></p>
-            <p><span class="label">Stasiun Tujuan:</span><span class="value"><?php echo htmlspecialchars($stasiun_tujuan); ?> </span></p>
-            <p><span class="label">Tanggal Keberangkatan:</span><span class="value"><?php echo $tanggal_berangkat; ?> </span></p>
-            <p><span class="label">Waktu Keberangkatan:</span><span class="value"><?php echo $waktu_keberangkat; ?> </span></p>
-            <p><span class="label">Jumlah Tiket:</span><span class="value"><?php echo $seat; ?> </span></p>
-            <p><span class="label">Total Harga:</span><span class="value">Rp <?php echo number_format($harga_total, 2, ',', '.'); ?> </span></p>
-        </div>
-
-        <div class="divider"></div>
-
-        <div class="footer">
-            <button onclick="window.print()">Cetak Tiket</button>
-            <p>* Tanda terima ini sah digunakan untuk perjalanan</p>
+        <div class="arrow">&#x27A4;</div>
+        <div>
+            <strong><?= htmlspecialchars($waktu_tiba) ?></strong>
+            <span><?= htmlspecialchars($stasiun_tujuan) ?></span>
         </div>
     </div>
+
+    <div class="price">Harga Total: Rp <?= htmlspecialchars($harga_total) ?></div>
+
+    <div class="details">
+        <p>Gunakan e-tiket untuk cetak boarding pass di stasiun, dari 7x24 jam sebelum keberangkatan.</p>
+        <p>Untuk boarding, bawa tanda pengenal resmi sesuai yang digunakan pada saat pemesanan.</p>
+        <p>Tiba di stasiun setidaknya 60 menit sebelum keberangkatan.</p>
+    </div>
+</div>
 
 </body>
 </html>
