@@ -237,9 +237,7 @@ $page = isset($_GET['page']) ? $_GET['page'] : 'dashboard';
             </div>
 
             <div class="navbar-nav-right d-flex align-items-center" id="navbar-collapse">
-              <!-- Search -->
-              
-              <!-- /Search -->
+              <h1 class="mt-3 text-secondary">Tiketing Aplication | By Lang</h1>
 
               <ul class="navbar-nav flex-row align-items-center ms-auto">
                 <!-- Place this tag where you want the button to render. -->
