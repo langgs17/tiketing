@@ -95,11 +95,11 @@
                           <i class="bx bx-dots-vertical-rounded"></i>
                         </button>
                         <div class="dropdown-menu dropdown-menu-end" aria-labelledby="cardOpt3">
-                          <a class="dropdown-item" href="?page=kereta">Detail</a>
+                          <a class="dropdown-item" href="?page=stasiun">Detail</a>
                         </div>
                       </div>
                     </div>
-                    <span class="fw-semibold d-block mb-1">Data Stasiun</span>
+                    <span class="fw-semibold d-block mb-1">Stasiun Tersedia</span>
                     <h2 class="card-title mb-2"><?php echo $row['total_stasiun'];?></h2>
                   </div>
                 </div>
@@ -130,11 +130,11 @@
                           <i class="bx bx-dots-vertical-rounded"></i>
                         </button>
                         <div class="dropdown-menu dropdown-menu-end" aria-labelledby="cardOpt3">
-                          <a class="dropdown-item" href="?page=kereta">Detail</a>
+                          <a class="dropdown-item" href="?page=route">Detail</a>
                         </div>
                       </div>
                     </div>
-                    <span class="fw-semibold d-block mb-1">Data Route</span>
+                    <span class="fw-semibold d-block mb-1">Route Tersedia</span>
                     <h2 class="card-title mb-2"><?php echo $row['total_route'];?></h2>
                   </div>
                 </div>
@@ -165,7 +165,7 @@
                           <i class="bx bx-dots-vertical-rounded"></i>
                         </button>
                         <div class="dropdown-menu dropdown-menu-end" aria-labelledby="cardOpt3">
-                          <a class="dropdown-item" href="?page=kereta">Detail</a>
+                          <a class="dropdown-item" href="?page=pemesanan_pending">Detail</a>
                         </div>
                       </div>
                     </div>
@@ -177,54 +177,206 @@
         </div>
 
     </div>
-
     <?php
-include 'config.php';
+    include 'config.php';
 
-$result = mysqli_query($mysqli, "SELECT * FROM kereta ORDER BY id_kereta DESC");
+    $result = mysqli_query($mysqli, "SELECT pemesanan.*, route.* FROM pemesanan INNER JOIN route ON pemesanan.id_route = route.id_route ORDER BY pemesanan.id_pemesanan DESC");
 
-if (!$result) {
-    die("Query gagal: " . mysqli_error($mysqli));
-}
-?>
+    if (!$result) {
+        die("Query gagal: " . mysqli_error($mysqli));
+    }
+    ?>
 
-<div class="content-wrapper">
-    <div class="container-xxl flex-grow-1 container-p-y">
-        <h4 class="fw-bold py-3 mb-4"> Data Kereta </h4>
-        <div class="card">
-            <div class="card-header">
-                <a class="btn btn-primary" style="position:relative; float:left;" href="?page=kereta_tambah">Insert Train</a>
-            </div>
-            <div class="card-body">
-                <div class="table-responsive text-nowrap">
-                <table class="table table-striped">
-                <thead class="table-light">
-                    <tr>
-                        <th>ID Kereta</th>
-                        <th>Nama Kereta</th>
-                        <th>Tipe kereta</th>
-                        <th>Kapasitas</th>
-                        <th>Kode</th>
-                    </tr>
-                </thead>
-                <tbody class="table-border-bottom-0">
-                    <tr>
-                        <?php
-                            while($user_data = mysqli_fetch_array($result)) {
-                                echo "<tr>";
-                                echo "<td>".$user_data['id_kereta']."</td>";
-                                echo "<td>".$user_data['nama_kereta']."</td>";
-                                echo "<td>".$user_data['tipe']."</td>";
-                                echo "<td>".$user_data['kapasitas']."</td>";
-                                echo "<td>".$user_data['kode']."</td>";
-                            }
-                        ?>
-                    </tr>
-                </tbody>
-                </table>
+    <div class="content-wrapper">
+        <div class="container-xxl flex-grow-1 container-p-y">
+            <h4 class="fw-bold py-3 mb-4"> Data Pesanan Tiket </h4>
+            <div class="card">
+
+                <div class="card-body">
+                    <div class="table-responsive text-nowrap">
+                    <table class="table table-striped">
+                    <thead class="table-light">
+                        <tr>
+                            <th>Nama Pelanggan</th>
+                            <th>ID User</th>
+                            <th>Route Kereta</th>
+                            <th>Train Name</th>
+                            <th>harga</th>
+                            <th>status</th>
+                        </tr>
+                    </thead>
+                    <tbody class="table-border-bottom-0">
+                        <tr>
+                            <?php
+                                
+                                while($data = mysqli_fetch_array($result)) {
+
+                                    if ($data['status'] == 'belum bayar') {
+                                        $color = 'badge bg-label-warning me-1';
+                                    } elseif ($data['status'] == 'pending') {
+                                        $color = 'badge bg-label-primary me-1';
+                                    } elseif ($data['status'] == 'sudah bayar') {
+                                        $color = 'badge bg-label-success me-1';
+                                    } elseif ($data['status'] == 'dibatalkan') {
+                                        $color = 'badge bg-label-danger me-1';
+                                    }
+                                    
+                                    echo "<tr>";
+                                    echo "<td>".$data['nama_pelanggan']."</td>";
+                                    echo "<td>".$data['id_user']."</td>";
+                                    echo "<td>".$data['stasiun_asal'].' - '.$data['stasiun_asal']."</td>";
+                                    echo "<td>".$data['nama_kereta']."</td>";
+                                    echo "<td> Rp. " . number_format($data['harga_total'], 0, ',', '.') . "</td>";
+                                    echo 
+                                        '<td><span class="' . $color . ';">' . ucfirst($data['status']) . '</span></td>';
+                                }
+                            ?>
+                        </tr>
+                    </tbody>
+                    </table>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
-</div>
+
+    <?php
+    include 'config.php';
+
+    $result = mysqli_query($mysqli, "SELECT * FROM route ORDER BY id_route DESC");
+
+    if (!$result) {
+        die("Query gagal: " . mysqli_error($mysqli));
+    }
+    ?>
+
+    <div class="content-wrapper">
+        <div class="container-xxl flex-grow-1 container-p-y">
+            <h4 class="fw-bold py-3 mb-4"> Data Route</h4>
+            <div class="card">
+                <div class="card-body">
+                    <div class="table-responsive text-nowrap">
+                    <table class="table table-striped">
+                    <thead class="table-light">
+                        <tr>
+                            <th>Route ID</th>
+                            <th>Stasiun Awal</th>
+                            <th>Stasiun Tujuan</th>
+                            <th>Train ID</th>
+                            <th>Train Name</th>
+                            <th>Departure Time</level>
+                            <th>Arrival Time</level>
+                            <th>harga</th>
+                        </tr>
+                    </thead>
+                    <tbody class="table-border-bottom-0">
+                        <tr>
+                            <?php
+                                while($data = mysqli_fetch_array($result)) {
+                                    echo "<tr>";
+                                    echo "<td>".$data['id_route']."</td>";
+                                    echo "<td>".$data['stasiun_asal']."</td>";
+                                    echo "<td>".$data['stasiun_tujuan']."</td>";
+                                    echo "<td>".$data['id_kereta']."</td>";
+                                    echo "<td>".$data['nama_kereta']."</td>";
+                                    echo "<td>".$data['waktu_tiba']."</td>";
+                                    echo "<td>".$data['waktu_berangkat']."</td>";
+                                    echo "<td> Rp. " . number_format($data['harga'], 0, ',', '.') . "</td>";
+                                }
+                            ?>
+                        </tr>
+                    </tbody>
+                    </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <?php
+    $result = mysqli_query($mysqli, "SELECT * FROM kereta ORDER BY id_kereta DESC");
+
+    if (!$result) {
+        die("Query gagal: " . mysqli_error($mysqli));
+    }
+    ?>
+
+    <div class="content-wrapper">
+        <div class="container-xxl flex-grow-1 container-p-y">
+            <h4 class="fw-bold py-3 mb-4"> Data Kereta </h4>
+            <div class="card">
+                <div class="card-body">
+                    <div class="table-responsive text-nowrap">
+                    <table class="table table-striped">
+                    <thead class="table-light">
+                        <tr>
+                            <th>ID Kereta</th>
+                            <th>Nama Kereta</th>
+                            <th>Tipe kereta</th>
+                            <th>Kapasitas</th>
+                            <th>Kode</th>
+                        </tr>
+                    </thead>
+                    <tbody class="table-border-bottom-0">
+                        <tr>
+                            <?php
+                                while($user_data = mysqli_fetch_array($result)) {
+                                    echo "<tr>";
+                                    echo "<td>".$user_data['id_kereta']."</td>";
+                                    echo "<td>".$user_data['nama_kereta']."</td>";
+                                    echo "<td>".$user_data['tipe']."</td>";
+                                    echo "<td>".$user_data['kapasitas']."</td>";
+                                    echo "<td>".$user_data['kode']."</td>";
+                                }
+                            ?>
+                        </tr>
+                    </tbody>
+                    </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <?php
+    include 'config.php';
+
+    $result = mysqli_query($mysqli, "SELECT * FROM stasiun ORDER BY id_stasiun DESC");
+
+    if (!$result) {
+        die("Query gagal: " . mysqli_error($mysqli));
+    }
+    ?>
+
+    <div class="content-wrapper">
+        <div class="container-xxl flex-grow-1 container-p-y">
+            <h4 class="fw-bold py-3 mb-4"><span class="text-muted fw-light"></span> Data Stasiun</h4>
+            <div class="card">
+                <div class="card-body">
+                    <div class="table-responsive text-nowrap">
+                    <table class="table table-striped">
+                    <thead class="table-light">
+                        <tr>
+                            <th>ID Stasiun</th>
+                            <th>Nama Stasiun</th>
+                            <th>kota </th>
+                        </tr>
+                    </thead>
+                    <tbody class="table-border-bottom-0">
+                        <tr>
+                            <?php
+                                while($user_data = mysqli_fetch_array($result)) {
+                                    echo "<tr>";
+                                    echo "<td>".$user_data['id_stasiun']."</td>";
+                                    echo "<td>".$user_data['nama_stasiun']."</td>";
+                                    echo "<td>".$user_data['kota']."</td>";
+                                }
+                            ?>
+                        </tr>
+                    </tbody>
+                    </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 </main>

@@ -86,7 +86,7 @@ $page = isset($_GET['page']) ? $_GET['page'] : 'dashboard';
 
         <aside id="layout-menu" class="layout-menu menu-vertical menu bg-menu-theme">
           <div class="app-brand demo">
-            <a href="index.html" class="app-brand-link">
+            <a href="?page=dashboard" class="app-brand-link">
               <span class="app-brand-logo demo">
                 <svg
                   width="25"
@@ -237,7 +237,7 @@ $page = isset($_GET['page']) ? $_GET['page'] : 'dashboard';
             </div>
 
             <div class="navbar-nav-right d-flex align-items-center" id="navbar-collapse">
-              <h1 class="mt-3 text-secondary">Tiketing Aplication | By Lang</h1>
+              <h3 class="mt-3 text-secondary">Tiketing Aplication | By Lang</h3>
 
               <ul class="navbar-nav flex-row align-items-center ms-auto">
                 <!-- Place this tag where you want the button to render. -->
@@ -298,14 +298,12 @@ $page = isset($_GET['page']) ? $_GET['page'] : 'dashboard';
             ?>
           </main>
 
-            <footer class="py-4 bg-light mt-auto">
+            <footer class="py-4 bg-light mt-auto mb">
               <div class="container-fluid px-4">
                 <div class="d-flex align-items-center justify-content-between small">
                   <div class="text-muted">Copyright &copy; Langs </div>
                     <div>
-                      <a href="#">Privacy Policy</a>
-                      &middot;
-                      <a href="#">Terms &amp; Conditions</a>
+                      <a href="https://github.com/langgs17">Github</a>
                     </div>
                 </div>
               </div>
