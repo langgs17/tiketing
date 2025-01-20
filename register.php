@@ -13,7 +13,7 @@ if(isset($_POST['add'])) {
 
     if($query) {
 
-        echo "<script>alert('Tambah data users berhasil');location.href='index.php  ';</script>";
+        echo "<script>alert('Tambah data users berhasil');location.href='index.php';</script>";
     } else {
         echo '<script>alert("Tambah data users gagal")</script>';
     }
